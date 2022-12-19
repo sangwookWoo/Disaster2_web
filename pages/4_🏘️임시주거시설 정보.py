@@ -36,7 +36,7 @@ def main():
 
     m = folium.Map(
     location=[mapping_data['위도'].mean(), mapping_data['경도'].mean()],
-    zoom_start= 10, width = '70%', height = '50%'
+    zoom_start= 10, width = '70%', height = '50%', zoom_control=False, scrollWheelZoom=False, dragging=False
     )
     coords = mapping_data[['위도', '경도','시설명', '상세주소','시설면적', '주거능력']] 
     marker_cluster = MarkerCluster().add_to(m)
