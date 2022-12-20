@@ -139,7 +139,7 @@ def dam_data_make():
 def dam_map(data):
         m = folium.Map(
         location=[data['lat'].mean(), data['lon'].mean()],
-        zoom_start= 7, width = '70%', height = '50%',  zoom_control=False, scrollWheelZoom=False, dragging=False
+        zoom_start= 7, width = '70%', height = '50%', scrollWheelZoom=False, dragging=False
         )
         coords = data[['lat', 'lon', 'obsnm', 'swl', 'inf', 'sfw', 'ecpc', 'tototf']]
         for idx in coords.index:
