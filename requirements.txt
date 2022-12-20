@@ -11,3 +11,4 @@ streamlit-folium>=0.6
 datetime
 bs4
 lxml
+streamlit-option-menu
