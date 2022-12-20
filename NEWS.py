@@ -48,7 +48,7 @@ def main():
         warning_message = ",".join(list_)
         st.subheader("❗" + warning_message)
         st.write("해당 지역 거주자 분들은  \n  혹시 모를 사태에 대비해주시기 바랍니다.")
-        df = df.set_index('지점')
+        df = df.set_index(['지점', '홍수예보 종류'])
         # df[['홍수예보 종류', '강명', '변동상황', '주의지역', '주의강명']]
         st.dataframe(df)
         
