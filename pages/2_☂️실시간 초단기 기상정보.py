@@ -94,9 +94,9 @@ def main():
         sky_data = str(sky.loc[idx,'fcstValue'])
         if sky_data == "1":
             sky_data = "☀️맑음"
-        elif sky_data == "2":
-            sky_data = "⛅구름많음"
         elif sky_data == "3":
+            sky_data = "⛅구름많음"
+        elif sky_data == "4":
             sky_data = "☁️흐림"
             
         shape_raining = str(shape_rn.loc[idx,'fcstValue'])
