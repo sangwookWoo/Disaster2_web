@@ -86,7 +86,7 @@ def main():
 
     cd_nm, sgg_nm, temperature, raining, sky, shape_rn, humidity, thunder, windspeed = weatherData()
 
-    col1, col2 = st.columns(6)
+    col1, col2 = st.columns(2)
     for idx in temperature.index:
         time = str(raining.loc[idx,'fcstTime'])[0:2] + "시"
         temperature_data = str(temperature.loc[idx,'fcstValue'])
@@ -142,7 +142,7 @@ def main():
                 st.metric("💧습도 : " + humidity_data + "%", value= raining_data, delta= shape_raining)
                 if thunder_data != "0":
                     st.write("⚡낙뢰 " + thunder_data + "kA")
-                    
+
         with col2:
             if idx % 6 == 1:
                 st.markdown(f"#### {time}")
