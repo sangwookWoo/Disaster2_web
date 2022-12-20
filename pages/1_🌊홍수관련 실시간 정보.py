@@ -216,7 +216,6 @@ def main():
             image = Image.open(os.path.join(filePath,'using_data','수위.png'))
             st.markdown("###### 마커 색별 수위 정보")
             st.image(image, caption=None, width=None, use_column_width=None)
-            st.markdown("###### 현재 수위 / 최고기준 수위")
             st.write(f"현재 {(datetime.now()+ timedelta(hours = 9)).strftime('%Y-%m-%d %H:%M:%S')} 기준, 10분 단위로 최신 업데이트 된 정보입니다. 해당 페이지는 한강홍수통제소의 데이터를 사용합니다😊")
 
 
