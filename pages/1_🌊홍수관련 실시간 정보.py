@@ -11,7 +11,6 @@ from folium.plugins import MarkerCluster
 from streamlit_folium import st_folium
 from datetime import datetime, timedelta
 from PIL import Image
-import geemap.foliumap as geemap
 
 filePath, fileName = os.path.split(__file__)
 
