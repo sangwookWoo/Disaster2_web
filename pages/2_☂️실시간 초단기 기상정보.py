@@ -94,9 +94,13 @@ def main():
     [data-testid="stMetricValue"] > div:nth-child(1) {
         justify-content: center;
     }
+    /*center metric value*/
+    [data-testid="stMetricDelta"] > div:nth-child(1) {
+        justify-content: center;
+    }
     </style>
     ''', unsafe_allow_html=True)
-    
+
     cd_nm, sgg_nm, temperature, raining, sky, shape_rn, humidity, thunder, windspeed = weatherData()
 
     col1, col2 = st.columns(2)
