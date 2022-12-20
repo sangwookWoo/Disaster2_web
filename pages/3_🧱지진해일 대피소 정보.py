@@ -28,7 +28,7 @@ def TsunamiShelter():
 def Shelter_map(data):
         m = folium.Map(
         location=[data['lat'].mean(), data['lon'].mean()],
-        zoom_start= 7, width = '70%', height = '50%', dragging=False
+        zoom_start= 7, width = '70%', height = '50%'
         )
         marker_cluster = MarkerCluster().add_to(m)
         for idx in data.index:
