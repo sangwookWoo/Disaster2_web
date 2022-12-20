@@ -9,8 +9,6 @@ from streamlit_folium import st_folium
 
 filePath, fileName = os.path.split(__file__)
 
-def header(content):
-     st.markdown(f'<p style="background-color:#FFFFFFcc;color:#302626;font-size:36px;border-radius:2%;">{content}</p>', unsafe_allow_html=True)
 
 def main():
     st.set_page_config(
@@ -19,7 +17,7 @@ def main():
     )
 
 
-    header("🏘️임시주거시설 정보")
+    st.header("🏘️임시주거시설 정보")
     st.write("위치 정보를 선택하고 지도를 확대하면서, 가까운 임시주거시설 정보를 찾으세요🙏")
     data_path = os.path.join(filePath,'using_data','temporary_house.csv')
     df = pd.read_csv(data_path)
