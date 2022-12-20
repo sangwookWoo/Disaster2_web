@@ -27,7 +27,7 @@ def main():
 
         #### 페이지 헤더, 서브헤더 제목 설정
         # 헤더
-        st.header("⛔홍수 특보 발령사항(최근 24시간 내)")
+        st.header("⛔홍수 특보 발령사항")
 
         
         serviceKey = 'A3A7BEB0-361E-4134-878C-BD8004204558'
@@ -54,7 +54,7 @@ def main():
         st.image(image)
         st.video('https://www.youtube.com/watch?v=cOQEdUBpLjg')
     except :
-        st.subheader("최근 24시간 내 발효된 홍수 특보 발령사항이 없습니다😊")
+        st.write("최근 24시간 내 발효된 홍수 특보 발령사항이 없습니다😊")
         image = Image.open(os.path.join(filePath,'pages','using_data', '홍수발생시 요령.png'))
         # st.image(image)
         st.video('https://www.youtube.com/watch?v=cOQEdUBpLjg')
