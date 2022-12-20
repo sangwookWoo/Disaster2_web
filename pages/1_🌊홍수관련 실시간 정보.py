@@ -11,6 +11,7 @@ from folium.plugins import MarkerCluster
 from streamlit_folium import st_folium
 from datetime import datetime, timedelta
 from PIL import Image
+import geemap.foliumap as geemap
 
 filePath, fileName = os.path.split(__file__)
 
@@ -79,6 +80,7 @@ def flow_map(data):
     zoom_start= 7, width = '70%', height = '50%',  scrollWheelZoom=False, dragging=False
     )
     coords = data[['lat', 'lon', 'obsnm', '수위경보', 'pfh', 'wl']]
+
     # marker_cluster = MarkerCluster().add_to(m)
     for idx in coords.index:
         if coords.loc[idx,'수위경보'] == "정상수위 단계":
