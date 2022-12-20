@@ -15,50 +15,22 @@ from PIL import Image
 filePath, fileName = os.path.split(__file__)
 
 
-def flowsiteAPI_data(serviceKey, HydroType, DataType, DocumentType):
-        url = f'https://api.hrfco.go.kr/{serviceKey}/{HydroType}/{DataType}{DocumentType}'
-        response = requests.get(url)
-        contents = response.text
-        json_ob = json.loads(contents)
-        body = json_ob['content']
-        body = pd.json_normalize(body)
-        return body
+def floodsiteAPI_livedata(HydroType, DataType, time = None, DocumentType = None):
+    if DataType == 'list':
+        url = f'http://223.130.129.189:9191/{HydroType}/{DataType}/{time}{DocumentType}'
+    elif DataType == 'info':
+        url = f'http://223.130.129.189:9191/{HydroType}/{DataType}{DocumentType}'
+    response = requests.get(url)
+    contents = response.text
+    json_ob = json.loads(contents)
+    body = json_ob['content']
+    body = pd.json_normalize(body)
+    return body
     
-
-def flowsiteAPI_livedata(serviceKey, HydroType, DataType, DocumentType):
-        url = f'https://api.hrfco.go.kr/{serviceKey}/{HydroType}/{DataType}/10M{DocumentType}'
-        response = requests.get(url)
-        contents = response.text
-        pp = pprint.PrettyPrinter(indent =4)
-        # pp.pprint(response.content)
-        json_ob = json.loads(contents)
-        body = json_ob['content']
-        # body = json_ob['response']['body']['item']
-        body = pd.json_normalize(body)
-        return body
-    
-     
-def flowsiteAPI_livedata_1h(serviceKey, HydroType, DataType, DocumentType):
-        url = f'https://api.hrfco.go.kr/{serviceKey}/{HydroType}/{DataType}/1H{DocumentType}'
-        response = requests.get(url)
-        contents = response.text
-        pp = pprint.PrettyPrinter(indent =4)
-        # pp.pprint(response.content)
-        json_ob = json.loads(contents)
-        body = json_ob['content']
-        # body = json_ob['response']['body']['item']
-        body = pd.json_normalize(body)
-        return body
-
  
 def flowsite():
-    serviceKey = 'A3A7BEB0-361E-4134-878C-BD8004204558'
-    HydroType = 'waterlevel'
-    DataType = 'list'
-    DocumentType = '.json'
-    water_level_live = flowsiteAPI_livedata(serviceKey, HydroType, DataType, DocumentType)
-    DataType = 'info'
-    water_level = flowsiteAPI_data(serviceKey, HydroType, DataType, DocumentType)
+    water_level_live = floodsiteAPI_livedata('getWaterLevel10M', 'list', '10M', '.json')
+    water_level = floodsiteAPI_livedata('getWaterLevel10M', 'info', None, '.json')
     water_level = water_level[water_level['attwl'] != ' ']
     water_level['시도명'] = water_level['addr'].str.split(' ').str[0]
     water_level['lat'] = water_level['lat'].apply(lambda x : int(x.split('-')[0]) + (int(x.split('-')[1]) / 60) + (int(x.split('-')[2]) / 3600) if len(x.split('-')) == 3 else x)
@@ -76,8 +48,7 @@ def flowsite():
 def flow_map(data):
     m = folium.Map(
     location=[data['lat'].mean(), data['lon'].mean()],
-    zoom_start= 7, width = '70%', height = '50%',  scrollWheelZoom=False, dragging=False
-    )
+    zoom_start= 7, width = '70%', height = '50%',  scrollWheelZoom=False, dragging=False)
     coords = data[['lat', 'lon', 'obsnm', '수위경보', 'pfh', 'wl']]
 
     # marker_cluster = MarkerCluster().add_to(m)
@@ -95,40 +66,9 @@ def flow_map(data):
     return m
 
  
-def rainfall_api():
-    serviceKey = 'A3A7BEB0-361E-4134-878C-BD8004204558'
-    HydroType = 'rainfall'
-    DataType = 'list'
-    DocumentType = '.json'
-    water_level_live = flowsiteAPI_livedata(serviceKey, HydroType, DataType, DocumentType)
-    DataType = 'info'
-    water_level = flowsiteAPI_data(serviceKey, HydroType, DataType, DocumentType)
-    water_level['시도명'] = water_level['addr'].str.split(' ').str[0]
-    water_level['lat'] = water_level['lat'].apply(lambda x : int(x.split('-')[0]) + (int(x.split('-')[1]) / 60) + (int(x.split('-')[2]) / 3600) if len(x.split('-')) == 3 else x)
-    water_level['lon'] = water_level['lon'].apply(lambda x : int(x.split('-')[0]) + (int(x.split('-')[1]) / 60) + (int(x.split('-')[2]) / 3600) if len(x.split('-')) == 3 else x)
-    rainfall_df = pd.merge(water_level, water_level_live, on = 'rfobscd', how = 'inner')
-    return rainfall_df
-
- 
-def rainfall_map(data):
-    m = folium.Map(
-    location=[data['lat'].mean(), data['lon'].mean()],
-    zoom_start= 7
-    )
-    coords = data[['lat', 'lon', 'obsnm', 'rf']]
-    for idx in coords.index:
-        folium.Marker([coords.loc[idx, 'lat'], coords.loc[idx, 'lon']], icon = folium.Icon(color="green"), tooltip = coords.loc[idx,'obsnm'] + ' : ' + str(coords.loc[idx,'rf'])).add_to(m)
-    return m
-
- 
 def dam_data_make():
-        serviceKey = 'A3A7BEB0-361E-4134-878C-BD8004204558'
-        HydroType = 'dam'
-        DataType = 'list'
-        DocumentType = '.json'
-        livedata = flowsiteAPI_livedata_1h(serviceKey, HydroType, DataType, DocumentType)
-        DataType = 'info'
-        data = flowsiteAPI_data(serviceKey, HydroType, DataType, DocumentType)
+        livedata = floodsiteAPI_livedata('getDam10M', 'list', '1H', '.json')
+        data = floodsiteAPI_livedata('getDam10M', 'info', None, '.json')
         dam_data = pd.merge(data, livedata, on = 'dmobscd', how = 'inner')
         dam_data = dam_data[dam_data['lat'] != ' ']
         dam_data = dam_data[dam_data['lon'] != ' ']
@@ -150,13 +90,8 @@ def dam_map(data):
 
  
 def bo_data_make():
-        serviceKey = 'A3A7BEB0-361E-4134-878C-BD8004204558'
-        HydroType = 'bo'
-        DataType = 'list'
-        DocumentType = '.json'
-        livedata = flowsiteAPI_livedata_1h(serviceKey, HydroType, DataType, DocumentType)
-        DataType = 'info'
-        data = flowsiteAPI_data(serviceKey, HydroType, DataType, DocumentType)
+        livedata = floodsiteAPI_livedata('getBo10M', 'list', '1H', '.json')
+        data = floodsiteAPI_livedata('getBo10M', 'info', None, '.json')
         bo_data = pd.merge(data, livedata, on = 'boobscd', how = 'inner')
         bo_data = bo_data[bo_data['lat'] != ' ']
         bo_data = bo_data[bo_data['lon'] != ' ']

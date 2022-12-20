@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 import requests
 import json
 
+
 filePath, fileName = os.path.split(__file__)
 data_path = os.path.join(filePath,'using_data','korea_weatherlocation_xy.csv')
 
