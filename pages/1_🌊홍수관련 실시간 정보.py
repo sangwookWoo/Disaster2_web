@@ -76,7 +76,7 @@ def flowsite():
 def flow_map(data):
     m = folium.Map(
     location=[data['lat'].mean(), data['lon'].mean()],
-    zoom_start= 7, width = '70%', height = '50%',  zoom_control=False, scrollWheelZoom=False, dragging=False
+    zoom_start= 7, width = '70%', height = '50%',  scrollWheelZoom=False, dragging=False
     )
     coords = data[['lat', 'lon', 'obsnm', '수위경보', 'pfh', 'wl']]
     # marker_cluster = MarkerCluster().add_to(m)
@@ -167,7 +167,7 @@ def bo_data_make():
 def bo_map(data):
         m = folium.Map(
         location=[data['lat'].mean(), data['lon'].mean()],
-        zoom_start= 7, width = '70%', height = '50%',  zoom_control=False, scrollWheelZoom=False, dragging=False
+        zoom_start= 7, width = '70%', height = '50%',  scrollWheelZoom=False, dragging=False
         )
         coords = data[['lat', 'lon', 'obsnm', 'swl', 'inf', 'sfw', 'ecpc', 'tototf']]
         for idx in coords.index:
