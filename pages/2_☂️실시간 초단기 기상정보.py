@@ -66,7 +66,7 @@ def main():
 
     st.set_page_config(
         page_title = "⛔위기 대응 프로젝트",
-        layout = 'wide'
+        layout = 'centered'
     )
 
     st.write(
@@ -81,7 +81,7 @@ def main():
                 
                 
     st.header("☂️실시간 초단기 기상정보")
-    st.write("위치 정보를 선택하여 직후 6시간의 기상정보를 받아보세요🙏")
+    st.write("위치 정보 선택 후, 이후 6시간의 기상정보를 받아보세요🙏")
 
 
     cd_nm, sgg_nm, temperature, raining, sky, shape_rn, humidity, thunder, windspeed = weatherData()

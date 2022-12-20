@@ -180,7 +180,7 @@ def main():
     # 페이지 기본 설정
     st.set_page_config(
     page_title = "⛔위기 대응 프로젝트",
-    layout = 'wide'
+    layout = 'centered'
     )
 
     st.header("🌊홍수관련 실시간 정보")

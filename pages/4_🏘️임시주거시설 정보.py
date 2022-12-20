@@ -13,12 +13,12 @@ filePath, fileName = os.path.split(__file__)
 def main():
     st.set_page_config(
         page_title = "⛔위기 대응 프로젝트",
-        layout = 'wide'
+        layout = 'centered'
     )
 
 
     st.header("🏘️임시주거시설 정보")
-    st.write("위치 정보를 선택하고 지도를 확대하면서, 가까운 임시주거시설 정보를 찾으세요🙏")
+    st.write("위치 정보를 선택하고 지도를 확대하면서,  \n 가까운 임시주거시설 정보를 찾으세요🙏")
     data_path = os.path.join(filePath,'using_data','temporary_house.csv')
     df = pd.read_csv(data_path)
 

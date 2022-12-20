@@ -14,11 +14,11 @@ def main():
 
     st.set_page_config(
         page_title = "⛔위기 대응 프로젝트",
-        layout = 'wide'
+        layout = 'centered'
     )
 
     st.header("💊긴급구호물자 구매업체")
-    st.write("위치 정보를 선택하여 가까운 구매업체를 찾으세요🙏")
+    st.write("위치 정보를 선택하여  \n 가까운 구매업체를 찾으세요🙏")
     df = pd.read_csv(data_path)
 
     cd_nm = st.selectbox('시도 선택',list(df['시도명'].unique()))
