@@ -24,7 +24,8 @@ def main():
     cd_nm = st.selectbox('시도 선택',list(df['시도명'].unique()))
     sgg_nm = st.selectbox('시군구 선택',list(df[df['시도명'] == cd_nm]['시군구명'].unique()))
     df = df[(df['시도명'] == cd_nm) & (df['시군구명'] == sgg_nm)]
-    st.dataframe(data= df.reset_index(drop = True), use_container_width= True)
+    df = df.set_index('업체명').drop(columns = ['시도명', '시군구명'])
+    st.dataframe(data= df, use_container_width= True)
 
 if __name__ == "__main__":
     main()

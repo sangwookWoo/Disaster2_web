@@ -88,7 +88,8 @@ def main():
             col1, col2, col3, col4 = st.columns(4)
             col1.metric("지역 내 응급의료기관 수", str(len(emergency_hospital_df)) + '개')
             col2.metric('지역 내 응급실 가용병상', '총 ' + str(sum) + '개')
-            st.dataframe(data=emergency_hospital_df.reset_index(drop = True), use_container_width= True)
+            emergency_hospital_df = emergency_hospital_df.set_index('기관명').drop(columns = '정보 업데이트 일시')
+            st.dataframe(data=emergency_hospital_df, use_container_width= True)
 
         except Exception as E:
             st.write("😓죄송합니다. 해당 지역에 의료시설이 없습니다.")

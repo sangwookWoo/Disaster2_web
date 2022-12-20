@@ -32,21 +32,22 @@ def main():
 
 
     # 지도 시각화
-    mapping_data = df[['위도','경도','시설명', '상세주소', '시설면적', '주거능력']]
+    mapping_data = df[['위도','경도','시설명', '상세주소', '시설면적', '주거능력', '지자체담당자연락처','관리부서']]
 
     m = folium.Map(
     location=[mapping_data['위도'].mean(), mapping_data['경도'].mean()],
     zoom_start= 10, width = '70%', height = '50%', scrollWheelZoom=False, dragging=False
     )
-    coords = mapping_data[['위도', '경도','시설명', '상세주소','시설면적', '주거능력']] 
+    coords = mapping_data[['위도', '경도','시설명', '상세주소','시설면적', '주거능력','지자체담당자연락처', '관리부서']] 
     marker_cluster = MarkerCluster().add_to(m)
     for idx in coords.index:
         # popup 크기 설정
-        text = coords.loc[idx,'시설명'] + '<br>상세주소 : ' + str(coords.loc[idx,'상세주소']) +'<br>시설면적 : ' + str(coords.loc[idx,'시설면적']) + '<br>주거능력 : ' + str(coords.loc[idx,'주거능력'])
+        text = coords.loc[idx,'시설명'] + '<br>상세주소 : ' + str(coords.loc[idx,'상세주소']) +'<br>시설면적 : ' + str(coords.loc[idx,'시설면적']) + '<br>주거능력 : ' + str(coords.loc[idx,'주거능력']) + '<br>관리부서 : ' + str(coords.loc[idx,'관리부서']) + '<br>지자체 담당자 연락처 : ' + str(coords.loc[idx,'지자체담당자연락처'])
         folium.Marker([coords.loc[idx,'위도'], coords.loc[idx,'경도']], icon = folium.Icon(color="purple"), tooltip = text).add_to(marker_cluster)
         
     st_folium(m, returned_objects=[])
-    st.dataframe(data=df.drop(columns = ['시도명', '시군구명', '경도','위도']).reset_index(drop = True), use_container_width= True)
+    df = df.set_index('시설명')
+    st.dataframe(data=df.drop(columns = ['시도명', '시군구명', '경도','위도']), use_container_width= True)
 
 
 if __name__ == "__main__":
