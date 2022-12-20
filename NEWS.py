@@ -31,7 +31,7 @@ def main():
 
         HydroType = 'getFldfct'
         DataType = 'list'
-        Edt = '20220811'
+        Edt = '20220810'
         DocumentType = '.json'
         # Edt = datetime.today().strftime(("%Y%m%d"))
         df = flood_news(HydroType, DataType, Edt, DocumentType).drop(columns = 'links')
