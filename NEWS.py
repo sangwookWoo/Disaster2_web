@@ -31,9 +31,9 @@ def main():
 
         HydroType = 'getFldfct'
         DataType = 'list'
-        Edt = '20220810'
+        # Edt = '20220810'
         DocumentType = '.json'
-        # Edt = datetime.today().strftime(("%Y%m%d"))
+        Edt = datetime.today().strftime(("%Y%m%d"))
         df = flood_news(HydroType, DataType, Edt, DocumentType).drop(columns = 'links')
         df.columns = ['발표일시','발표자','수위도달 예상일시', '예상 수위표수위', '예상 해발수위', '홍수예보 종류', '홍수예보 번호', '지점', '기존발령일시', 
                     '비고','강명','변동상황', '현재 일시', '현재 수위표수위', '현재 해발수위', '예상 일시(변동)', '예상 수위표수위(변동)', '예상 해발수위(변동)', '관측소 코드', '주의 지역', 
