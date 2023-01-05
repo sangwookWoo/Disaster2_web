@@ -62,7 +62,7 @@ def main():
 
     ####  title setting
     st.header("🚑응급의료기관 정보 실시간 조회")
-    st.write("위치 정보를 선택하여  \n 가까운 응급의료기관과 병실현황을 조회하세요!🙏")
+    st.write("위치 정보를 선택하여 가까운 응급의료기관과 병실현황을 조회하세요!🙏")
 
     ####  select box data
     df = pd.read_csv(data_path)
