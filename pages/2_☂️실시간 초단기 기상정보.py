@@ -27,10 +27,10 @@ def weatherData():
 
     # 지역 선택
     cd_nm_list = list(korea_xy_df['1단계'].unique())
-    cd_nm = st.selectbox('시도 선택',cd_nm_list)
+    cd_nm = st.sidebar.selectbox('시도 선택',cd_nm_list)
 
     sgg_nm_list = list(korea_xy_df[korea_xy_df['1단계'] == cd_nm]['2단계'].unique())
-    sgg_nm = st.selectbox('시군구 선택',sgg_nm_list)
+    sgg_nm = st.sidebar.selectbox('시군구 선택',sgg_nm_list)
 
     # 격자 X, 격자 Y값 찾기
     korea_xy_df = korea_xy_df[(korea_xy_df['1단계'] == cd_nm) & (korea_xy_df['2단계'] == sgg_nm)]

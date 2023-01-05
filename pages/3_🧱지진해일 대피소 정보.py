@@ -39,14 +39,14 @@ def Shelter_map(data):
 def main():
     st.set_page_config(
     page_title = "⛔위기 대응 프로젝트",
-    layout = 'centered' 
+    layout = 'wide' 
     )
     st.header("🌊지진 해일 대피소 정보")
     st.write("지역을 선택하고 지도를 확대하면서,  \n 가까운 지진해일 국내 대피소 정보를 받아보세요🙏")
     df = TsunamiShelter()
     sido_list = list(df['sido_name'].unique())
     sido_list.insert(0, '전국')
-    cd_nm = st.selectbox('시도 선택',sido_list)
+    cd_nm = st.sidebar.selectbox('시도 선택',sido_list)
     if cd_nm != '전국':
         df = df[df['sido_name'] == cd_nm]
     
