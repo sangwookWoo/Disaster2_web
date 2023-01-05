@@ -22,7 +22,7 @@ def main():
         # 페이지 기본 설정
         st.set_page_config(
             page_title = "⛔위기 대응 프로젝트",
-            layout = 'centered'
+            layout = 'wide'
         )
 
         #### 페이지 헤더, 서브헤더 제목 설정
