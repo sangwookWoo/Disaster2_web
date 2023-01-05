@@ -54,11 +54,11 @@ def main():
         st.image(image)
         st.video('https://www.youtube.com/watch?v=cOQEdUBpLjg')
     except :
-        st.write("해당 페이지는 웹 환경에 최적화되어 제작되었습니다.😊")
         st.write("최근 24시간 내 발효된 홍수 특보 발령사항이 없습니다😊")
         image = Image.open(os.path.join(filePath,'pages','using_data', '홍수발생시 요령.png'))
         # st.image(image)
         st.video('https://www.youtube.com/watch?v=cOQEdUBpLjg')
+        st.write("해당 페이지는 웹 환경에 최적화되어 제작되었습니다.")
         pass
 
 if __name__ == "__main__":
