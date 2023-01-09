@@ -3,8 +3,10 @@ import pandas as pd
 import numpy as np
 import os
 from datetime import datetime, timedelta
+from pytz import timezone
 import requests
 import json
+
 
 
 filePath, fileName = os.path.split(__file__)
@@ -15,7 +17,8 @@ data_path = os.path.join(filePath,'using_data','korea_weatherlocation_xy.csv')
 # 6시쯤 API 호출 안됨
 def weatherData():
     # 시간 설정
-    base_datebf30 = datetime.now() + timedelta(hours = 9) - timedelta(minutes = 30)
+    base_datebf30 = datetime.now(timezone('Asia/Seoul')) - timedelta(minutes = 30)
+
     base_date = base_datebf30.strftime('%Y%m%d')
     if int(base_datebf30.strftime('%d')) > 30:
         base_time = base_datebf30.strftime('%H00')
